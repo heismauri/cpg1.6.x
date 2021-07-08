@@ -4,11 +4,11 @@
  *
  * v1.0 originally written by Gregory Demar
  *
- * @copyright  Copyright (c) 2003-2020 Coppermine Dev Team
+ * @copyright  Copyright (c) 2003-2021 Coppermine Dev Team
  * @license    GNU General Public License version 3 or later; see LICENSE
  *
  * update.php
- * @since  1.6.08
+ * @since  1.6.12
  */
 
 // define('SKIP_AUTHENTICATION', true);
@@ -426,7 +426,7 @@ function cpg_get_config_value($config_name)
     $result = cpg_db_query("SELECT value FROM ".$CONFIG['TABLE_PREFIX']."config WHERE name='".$config_name."' LIMIT 1");
     $row = $result->fetchRow(true);
 
-    return $row[0];
+    return is_array($row) ? $row[0] : null;
 }
 
 // ----------------------------- TEST FUNCTIONS ---------------------------- //
@@ -769,6 +769,7 @@ function delete_files()
     // Attempt to delete outdated files
     $delete_file_array = array(
         'js/jquery-1.3.2.js',
+        'js/jquery-1.4.2.js',
         'logs/log_header.inc.php',
         'include/log_header.inc.php',
         'js/setup_swf_upload.js',
